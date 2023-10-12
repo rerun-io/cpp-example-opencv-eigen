@@ -78,7 +78,7 @@ int main() {
     projection_matrix(1, 2) = (height - 1) / 2.0;
     rec.log(
         "world/camera",
-        rerun::Pinhole(rerun::components::PinholeProjection(*(float(*)[9])projection_matrix.data()))
+        rerun::Pinhole(rerun::components::PinholeProjection(projection_matrix.data()))
             .with_resolution(rerun::components::Resolution({width, height}))
     );
     Eigen::Vector3f camera_position{0.0, -1.0, 0.0};
@@ -92,8 +92,8 @@ int main() {
     rec.log(
         "world/camera",
         rerun::Transform3D(
-            rerun::datatypes::Vec3D(*(float(*)[3])camera_position.data()),
-            rerun::datatypes::Mat3x3(*(float(*)[9])camera_orientation.data())
+            rerun::datatypes::Vec3D(camera_position.data()),
+            rerun::datatypes::Mat3x3(camera_orientation.data())
         )
     );
 
