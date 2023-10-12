@@ -62,11 +62,40 @@ int main() {
 
     // Points represented by std::vector<Eigen::Vector3f>
     auto points3d_vector = generate_random_points_vector(1000);
-    rec.log("points_from_vector", rerun::Points3D(points3d_vector));
+    rec.log("world/points_from_vector", rerun::Points3D(points3d_vector));
 
     // Points represented by Eigen::MatX3f (Nx3 matrix)
     Eigen::MatrixX3f points3d_matrix = Eigen::MatrixX3f::Random(num_points, 3);
-    rec.log("points_from_matrix", rerun::Points3D(points3d_matrix));
+    rec.log("world/points_from_matrix", rerun::Points3D(points3d_matrix));
+
+    // Posed pinhole camera
+    float width = 640.0f;
+    float height = 480.0f;
+    Eigen::Matrix3f projection_matrix = Eigen::Matrix3f::Identity();
+    projection_matrix(0, 0) = 500.0f;
+    projection_matrix(1, 1) = 500.0f;
+    projection_matrix(0, 2) = (width - 1) / 2.0;
+    projection_matrix(1, 2) = (height - 1) / 2.0;
+    rec.log(
+        "world/camera",
+        rerun::Pinhole(rerun::components::PinholeProjection(*(float(*)[9])projection_matrix.data()))
+            .with_resolution(rerun::components::Resolution({width, height}))
+    );
+    Eigen::Vector3f camera_position{0.0, -1.0, 0.0};
+    Eigen::Matrix3f camera_orientation;
+    // clang-format off
+    camera_orientation <<
+        0.0, 1.0, 0.0,
+        0.0, 0.0, 1.0,
+        1.0, 0.0, 0.0;
+    // clang-format on
+    rec.log(
+        "world/camera",
+        rerun::Transform3D(
+            rerun::datatypes::Vec3D(*(float(*)[3])camera_position.data()),
+            rerun::datatypes::Mat3x3(*(float(*)[9])camera_orientation.data())
+        )
+    );
 
     // Image
     std::string image_path = "rerun-logo.png";
