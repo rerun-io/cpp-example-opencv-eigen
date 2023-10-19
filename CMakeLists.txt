@@ -14,7 +14,6 @@ FetchContent_MakeAvailable(rerun_sdk)
 
 find_package(Eigen3 REQUIRED)
 find_package(OpenCV REQUIRED)
-find_package(Arrow REQUIRED)
 
 add_executable(rerun_ext_example src/main.cpp)
 
