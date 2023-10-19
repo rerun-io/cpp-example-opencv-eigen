@@ -4,6 +4,7 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgcodecs.hpp>
+#include <opencv2/imgproc.hpp>
 #include <rerun.hpp>
 
 template <>
@@ -78,7 +79,9 @@ int main() {
     projection_matrix(1, 2) = (height - 1) / 2.0;
     rec.log(
         "world/camera",
-        rerun::Pinhole(rerun::components::PinholeProjection(projection_matrix.data()))
+        rerun::Pinhole(rerun::components::PinholeProjection(
+                           *reinterpret_cast<float(*)[9]>(projection_matrix.data())
+                       ))
             .with_resolution(rerun::components::Resolution({width, height}))
     );
     Eigen::Vector3f camera_position{0.0, -1.0, 0.0};
@@ -92,20 +95,34 @@ int main() {
     rec.log(
         "world/camera",
         rerun::Transform3D(
-            rerun::datatypes::Vec3D(camera_position.data()),
-            rerun::datatypes::Mat3x3(camera_orientation.data())
+            rerun::datatypes::Vec3D(*reinterpret_cast<float(*)[3]>(camera_position.data())),
+            rerun::datatypes::Mat3x3(*reinterpret_cast<float(*)[9]>(camera_orientation.data()))
         )
     );
 
-    // Image
+    // Read image
     std::string image_path = "rerun-logo.png";
     cv::Mat img = imread(image_path, cv::IMREAD_COLOR);
     if (img.empty()) {
         std::cout << "Could not read the image: " << image_path << std::endl;
         return 1;
     }
-    imshow("Display window", img);
-    cv::waitKey(0);
+
+    // Log image to Rerun
+    cv::cvtColor(img, img, cv::COLOR_BGR2RGB); // Rerun expects RGB format
+    // NOTE currently we need to construct a vector to log an image, this will change in the future
+    //  see https://github.com/rerun-io/rerun/issues/3794
+    std::vector<uint8_t> img_vec(img.total() * img.channels());
+    img_vec.assign(img.data, img.data + img.total() * img.channels());
+    rec.log(
+        "image",
+        rerun::Image(
+            {static_cast<size_t>(img.rows),
+             static_cast<size_t>(img.cols),
+             static_cast<size_t>(img.channels())},
+            std::move(img_vec)
+        )
+    );
 
     return 0;
 }

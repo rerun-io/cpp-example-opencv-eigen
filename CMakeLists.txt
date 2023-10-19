@@ -8,22 +8,13 @@ if(NOT DEFINED CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 17)
 endif()
 
+include(FetchContent)
+FetchContent_Declare(rerun_sdk URL https://build.rerun.io/commit/f3a5ae2/rerun_cpp_sdk.zip)
+FetchContent_MakeAvailable(rerun_sdk)
+
 find_package(Eigen3 REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(Arrow REQUIRED)
-# find_package(rerun_sdk REQUIRED)  # this would be nice (i.e., installable rerun_sdk)
-
-# assume rerun_sdk has been build beforehand
-add_library(rerun_sdk INTERFACE)
-target_include_directories(rerun_sdk INTERFACE /home/leo/code/rerun/rerun_cpp/src/)
-target_link_libraries(rerun_sdk INTERFACE /home/leo/code/rerun/build/rerun_cpp/librerun_sdk.a)
-target_link_libraries(rerun_sdk INTERFACE /home/leo/code/rerun/target/release/librerun_c.a)
-if(ARROW_LINK_SHARED)
-    target_link_libraries(rerun_sdk INTERFACE Arrow::arrow_shared)
-else()
-    target_link_libraries(rerun_sdk INTERFACE Arrow::arrow_static)
-endif()
-
 
 add_executable(rerun_ext_example src/main.cpp)
 
