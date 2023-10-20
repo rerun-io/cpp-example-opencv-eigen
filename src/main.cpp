@@ -7,6 +7,7 @@
 #include <opencv2/imgproc.hpp>
 #include <rerun.hpp>
 
+// Adapters so we can log eigen vectors as rerun positions:
 template <>
 struct rerun::ComponentBatchAdapter<rerun::components::Position3D, std::vector<Eigen::Vector3f>> {
     // Sanity check that this is binary compatible.
@@ -26,6 +27,7 @@ struct rerun::ComponentBatchAdapter<rerun::components::Position3D, std::vector<E
     }
 };
 
+// Adapters so we can log an eigen matrix as rerun positions:
 template <>
 struct rerun::ComponentBatchAdapter<rerun::components::Position3D, Eigen::MatrixX3f> {
     // Sanity check that this is binary compatible.
@@ -62,11 +64,11 @@ int main() {
     const int num_points = 1000;
 
     // Points represented by std::vector<Eigen::Vector3f>
-    auto points3d_vector = generate_random_points_vector(1000);
+    const auto points3d_vector = generate_random_points_vector(1000);
     rec.log("world/points_from_vector", rerun::Points3D(points3d_vector));
 
     // Points represented by Eigen::MatX3f (Nx3 matrix)
-    Eigen::MatrixX3f points3d_matrix = Eigen::MatrixX3f::Random(num_points, 3);
+    const Eigen::MatrixX3f points3d_matrix = Eigen::MatrixX3f::Random(num_points, 3);
     rec.log("world/points_from_matrix", rerun::Points3D(points3d_matrix));
 
     // Posed pinhole camera
@@ -84,7 +86,7 @@ int main() {
                        ))
             .with_resolution(rerun::components::Resolution({width, height}))
     );
-    Eigen::Vector3f camera_position{0.0, -1.0, 0.0};
+    const Eigen::Vector3f camera_position{0.0, -1.0, 0.0};
     Eigen::Matrix3f camera_orientation;
     // clang-format off
     camera_orientation <<
@@ -95,8 +97,9 @@ int main() {
     rec.log(
         "world/camera",
         rerun::Transform3D(
-            rerun::datatypes::Vec3D(*reinterpret_cast<float(*)[3]>(camera_position.data())),
-            rerun::datatypes::Mat3x3(*reinterpret_cast<float(*)[9]>(camera_orientation.data()))
+            rerun::datatypes::Vec3D(*reinterpret_cast<const float(*)[3]>(camera_position.data())),
+            rerun::datatypes::Mat3x3(*reinterpret_cast<const float(*)[9]>(camera_orientation.data())
+            )
         )
     );
 
