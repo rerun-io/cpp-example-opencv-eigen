@@ -58,7 +58,7 @@ std::vector<Eigen::Vector3f> generate_random_points_vector(int num_points) {
 }
 
 int main() {
-    auto rec = rerun::RecordingStream("rerun_cpp_example_opencv_eigen");
+    auto rec = rerun::RecordingStream("rerun_example_cpp");
     rec.connect("127.0.0.1:9876").throw_on_failure();
 
     const int num_points = 1000;
