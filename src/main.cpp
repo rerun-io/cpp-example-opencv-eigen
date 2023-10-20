@@ -13,15 +13,15 @@ struct rerun::ComponentBatchAdapter<rerun::components::Position3D, std::vector<E
     static_assert(sizeof(components::Position3D) == sizeof(Eigen::Vector3f));
     static_assert(alignof(components::Position3D) <= alignof(Eigen::Vector3f));
 
-    ComponentBatch<components::Position3D> operator()(const std::vector<Eigen::Vector3f> &container
+    ComponentBatch<components::Position3D> operator()(const std::vector<Eigen::Vector3f>& container
     ) {
         return ComponentBatch<components::Position3D>::borrow(
-            reinterpret_cast<const components::Position3D *>(container.data()),
+            reinterpret_cast<const components::Position3D*>(container.data()),
             container.size()
         );
     }
 
-    ComponentBatch<components::Position3D> operator()(std::vector<Eigen::Vector3f> &&container) {
+    ComponentBatch<components::Position3D> operator()(std::vector<Eigen::Vector3f>&& container) {
         throw std::runtime_error("Not implemented for temporaries");
     }
 };
@@ -35,21 +35,21 @@ struct rerun::ComponentBatchAdapter<rerun::components::Position3D, Eigen::Matrix
     );
     static_assert(alignof(components::Position3D) <= alignof(Eigen::MatrixX3f));
 
-    ComponentBatch<components::Position3D> operator()(const Eigen::MatrixX3f &matrix) {
+    ComponentBatch<components::Position3D> operator()(const Eigen::MatrixX3f& matrix) {
         return ComponentBatch<components::Position3D>::borrow(
-            reinterpret_cast<const components::Position3D *>(matrix.data()),
+            reinterpret_cast<const components::Position3D*>(matrix.data()),
             matrix.rows()
         );
     }
 
-    ComponentBatch<components::Position3D> operator()(std::vector<Eigen::MatrixX3f> &&container) {
+    ComponentBatch<components::Position3D> operator()(std::vector<Eigen::MatrixX3f>&& container) {
         throw std::runtime_error("Not implemented for temporaries");
     }
 };
 
 std::vector<Eigen::Vector3f> generate_random_points_vector(int num_points) {
     std::vector<Eigen::Vector3f> points(num_points);
-    for (auto &point : points) {
+    for (auto& point : points) {
         point.setRandom();
     }
     return points;
