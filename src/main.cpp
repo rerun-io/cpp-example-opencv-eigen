@@ -71,21 +71,12 @@ int main() {
     const Eigen::MatrixX3f points3d_matrix = Eigen::MatrixX3f::Random(num_points, 3);
     rec.log("world/points_from_matrix", rerun::Points3D(points3d_matrix));
 
-    // Posed pinhole camera
-    float width = 640.0f;
-    float height = 480.0f;
-    Eigen::Matrix3f projection_matrix = Eigen::Matrix3f::Identity();
-    projection_matrix(0, 0) = 500.0f;
-    projection_matrix(1, 1) = 500.0f;
-    projection_matrix(0, 2) = (width - 1) / 2.0;
-    projection_matrix(1, 2) = (height - 1) / 2.0;
+    // Posed pinhole camera:
     rec.log(
         "world/camera",
-        rerun::Pinhole(rerun::components::PinholeProjection(
-                           *reinterpret_cast<float(*)[9]>(projection_matrix.data())
-                       ))
-            .with_resolution(rerun::components::Resolution({width, height}))
+        rerun::Pinhole::focal_length_and_resolution({500.0, 500.0}, {640.0, 480.0})
     );
+
     const Eigen::Vector3f camera_position{0.0, -1.0, 0.0};
     Eigen::Matrix3f camera_orientation;
     // clang-format off
@@ -97,9 +88,8 @@ int main() {
     rec.log(
         "world/camera",
         rerun::Transform3D(
-            rerun::datatypes::Vec3D(*reinterpret_cast<const float(*)[3]>(camera_position.data())),
-            rerun::datatypes::Mat3x3(*reinterpret_cast<const float(*)[9]>(camera_orientation.data())
-            )
+            rerun::datatypes::Vec3D(camera_position.data()),
+            rerun::datatypes::Mat3x3(camera_orientation.data())
         )
     );
 
