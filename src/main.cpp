@@ -29,22 +29,22 @@ struct rerun::ComponentBatchAdapter<rerun::components::Position3D, std::vector<E
 
 // Adapters so we can log an eigen matrix as rerun positions:
 template <>
-struct rerun::ComponentBatchAdapter<rerun::components::Position3D, Eigen::MatrixX3f> {
+struct rerun::ComponentBatchAdapter<rerun::components::Position3D, Eigen::Matrix3Xf> {
     // Sanity check that this is binary compatible.
     static_assert(
         sizeof(components::Position3D) ==
-        sizeof(Eigen::MatrixX3f::Scalar) * Eigen::MatrixX3f::ColsAtCompileTime
+        sizeof(Eigen::Matrix3Xf::Scalar) * Eigen::Matrix3Xf::RowsAtCompileTime
     );
-    static_assert(alignof(components::Position3D) <= alignof(Eigen::MatrixX3f));
+    static_assert(alignof(components::Position3D) <= alignof(Eigen::Matrix3Xf));
 
-    ComponentBatch<components::Position3D> operator()(const Eigen::MatrixX3f& matrix) {
+    ComponentBatch<components::Position3D> operator()(const Eigen::Matrix3Xf& matrix) {
         return ComponentBatch<components::Position3D>::borrow(
             reinterpret_cast<const components::Position3D*>(matrix.data()),
-            matrix.rows()
+            matrix.cols()
         );
     }
 
-    ComponentBatch<components::Position3D> operator()(std::vector<Eigen::MatrixX3f>&& container) {
+    ComponentBatch<components::Position3D> operator()(std::vector<Eigen::Matrix3Xf>&& container) {
         throw std::runtime_error("Not implemented for temporaries");
     }
 };
@@ -67,8 +67,8 @@ int main() {
     const auto points3d_vector = generate_random_points_vector(1000);
     rec.log("world/points_from_vector", rerun::Points3D(points3d_vector));
 
-    // Points represented by Eigen::MatX3f (Nx3 matrix)
-    const Eigen::MatrixX3f points3d_matrix = Eigen::MatrixX3f::Random(num_points, 3);
+    // Points represented by Eigen::Mat3Xf (3xN matrix)
+    const Eigen::Matrix3Xf points3d_matrix = Eigen::Matrix3Xf::Random(3, num_points);
     rec.log("world/points_from_matrix", rerun::Points3D(points3d_matrix));
 
     // Posed pinhole camera:
