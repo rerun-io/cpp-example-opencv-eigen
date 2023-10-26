@@ -76,7 +76,7 @@ int main() {
     // Posed pinhole camera:
     rec.log(
         "world/camera",
-        rerun::Pinhole::focal_length_and_resolution({500.0, 500.0}, {640.0, 480.0})
+        rerun::Pinhole::from_focal_length_and_resolution({500.0, 500.0}, {640.0, 480.0})
     );
 
     const Eigen::Vector3f camera_position{0.0, -1.0, 0.0};
