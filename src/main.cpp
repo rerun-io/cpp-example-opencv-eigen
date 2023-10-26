@@ -61,6 +61,8 @@ int main() {
     auto rec = rerun::RecordingStream("rerun_example_cpp");
     rec.connect().throw_on_failure();
 
+    rec.log_timeless("world", rerun::ViewCoordinates::RIGHT_HAND_Z_UP); // Set an up-axis
+
     const int num_points = 1000;
 
     // Points represented by std::vector<Eigen::Vector3f>
@@ -81,9 +83,9 @@ int main() {
     Eigen::Matrix3f camera_orientation;
     // clang-format off
     camera_orientation <<
-        0.0, 1.0, 0.0,
-        0.0, 0.0, 1.0,
-        1.0, 0.0, 0.0;
+        +1.0, +0.0, +0.0,
+        +0.0, +0.0, +1.0,
+        +0.0, -1.0, +0.0;
     // clang-format on
     rec.log(
         "world/camera",
