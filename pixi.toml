@@ -25,9 +25,9 @@ version = "0.1.0"
 [tasks]
 # Note: extra CLI argument after `pixi run TASK` are passed to the task cmd.
 
-prepare = "cmake -G Ninja -B build -S . -DCMAKE_BUILD_TYPE=Debug"
+prepare = "cmake -G Ninja -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
 clean = { cmd = "rm -rf build bin CMakeFiles/" }
-build = { cmd = "mkdir -p bin && cmake --build build --config Debug --target all", depends_on = [
+build = { cmd = "mkdir -p bin && cmake --build build --config RelWithDebInfo --target all", depends_on = [
     "prepare",
 ] }
 run = { cmd = "build/rerun_ext_example", depends_on = ["build"] }
