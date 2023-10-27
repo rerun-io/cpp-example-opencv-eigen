@@ -37,19 +37,36 @@ The easiest way to get started is to install [pixi](https://prefix.dev/docs/pixi
 
 ### Manually
 First install the required dependencies:
-* `arrow-cpp` (required by Rerun)
 * `eigen` and `opencv` (required by this example)
-* `cmake` and `ninja` (build tools)
+* `cmake` (for building)
 
-Build using:
 
+### Linux & Mac
+
+Build:
 ```bash
-mkdir build
-cd build
-cmake ..
-cmake --build . -- -j8
+cmake -B build
+cmake --build build -j
 ```
 
 Then run the binary with:
-
 `build/rerun_ext_example`
+
+
+### Windows using Visual Studio 2022
+
+
+Build
+```cmd
+cmake -B build  -G 'Visual Studio 17 2022'
+cmake --build build
+```
+Instead of building via CMake you can also open `build/rerun_external_cpp_proj.sln` in Visual Studio and build & run from there.
+
+Then run the binary with 
+```cmd
+build\RelWithDebInfo\rerun_ext_example.exe
+```
+Make sure that all dependent dlls (OpenCV & Eigen) are in PATH or next to the executable.
+
+
