@@ -27,8 +27,7 @@ prepare = "cmake -G 'Visual Studio 17 2022' -B build -S . -DCMAKE_BUILD_TYPE=Rel
 build = { cmd = "cmake --build build --config RelWithDebInfo", depends_on = [
     "prepare",
 ] }
-
-run = { cmd = "cp .pixi/env/Library/bin/*.dll build/RelWithDebInfo/ && build/RelWithDebInfo/rerun_ext_example.exe", depends_on = ["build"] }
+run = { cmd = "build/RelWithDebInfo/rerun_ext_example.exe", depends_on = ["build"] }
 
 [target.linux-64.tasks]
 prepare = "cmake -G 'Ninja' -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
@@ -56,6 +55,7 @@ run = { cmd = "build/rerun_ext_example", depends_on = ["build"] }
 [tasks]
 # Note: extra CLI argument after `pixi run TASK` are passed to the task cmd.
 clean = { cmd = "rm -rf build bin CMakeFiles/" }
+print-env = { cmd = "echo $PATH" }
 
 [dependencies]
 # Build tools:
