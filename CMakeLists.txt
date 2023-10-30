@@ -9,7 +9,7 @@ if(NOT DEFINED CMAKE_CXX_STANDARD)
 endif()
 
 include(FetchContent)
-FetchContent_Declare(rerun_sdk URL https://build.rerun.io/commit/b7f404a/rerun_cpp_sdk.zip) # 2023-10-29
+FetchContent_Declare(rerun_sdk URL https://build.rerun.io/commit/25dc50a/rerun_cpp_sdk.zip) # 2023-10-30
 FetchContent_MakeAvailable(rerun_sdk)
 
 find_package(Eigen3 REQUIRED)

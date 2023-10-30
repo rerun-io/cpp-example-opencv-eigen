@@ -20,7 +20,7 @@ std::vector<Eigen::Vector3f> generate_random_points_vector(int num_points) {
 
 int main() {
     auto rec = rerun::RecordingStream("rerun_example_cpp");
-    rec.connect().throw_on_failure();
+    rec.spawn().throw_on_failure();
 
     rec.log_timeless("world", rerun::ViewCoordinates::RIGHT_HAND_Z_UP); // Set an up-axis
 
