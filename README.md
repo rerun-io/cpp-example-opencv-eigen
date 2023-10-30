@@ -12,7 +12,17 @@ This is a minimal CMake project that shows how to use [Rerun](https://github.com
   </picture>
 </center>
 
-## Installing the Rerun viewer
+## Using `pixi`
+The easiest way to get started is to install [pixi](https://prefix.dev/docs/pixi/overview).
+
+The pixi environment described in `pixi.toml` contains all of the dependencies, including the rerun viewer,
+allowing you to run the example with a single command:
+* `pixi run example`
+
+## Without `pixi`
+If you choose not to use pixi, you will need to install a few things yourself before you get started.
+
+### Installing the Rerun Viewer
 The Rerun C++ SDK works by connecting to an awaiting Rerun Viewer over TCP.
 
 If you need to install the viewer, follow the [installation guide](https://www.rerun.io/docs/getting-started/installing-viewer). Two of the more common ways to install the Rerun are:
@@ -21,22 +31,13 @@ If you need to install the viewer, follow the [installation guide](https://www.r
 
 After you have installed it, you should be able to type `rerun` in your terminal to start the viewer.
 
-## Run this example
-
-### Using `pixi`
-The easiest way to get started is to install [pixi](https://prefix.dev/docs/pixi/overview).
-
-* Start the rerun viewer with `rerun` (see above)
-* Run the example with `pixi run example`
-
-
-### Manually
-First install the required dependencies:
+### Installing dependencies:
+This project depends on a few libraries and toolchains. Installing these is outside the scope of this README,
+but your OS should have these available though a common package manager:
 * `eigen` and `opencv` (required by this example)
 * `cmake` (for building)
 
-
-### Linux & Mac
+### Build and run on Linux & Mac
 
 Build:
 ```bash
@@ -48,8 +49,7 @@ Then run the binary with:
 `build/rerun_ext_example`
 
 
-### Windows using Visual Studio 2022
-
+### Build and run on Windows using Visual Studio 2022
 
 Build
 ```cmd
