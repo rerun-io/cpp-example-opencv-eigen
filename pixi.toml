@@ -24,24 +24,62 @@ version = "0.1.0"
 
 [tasks]
 # Note: extra CLI argument after `pixi run TASK` are passed to the task cmd.
-
-prepare = "cmake -G Ninja -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
 clean = { cmd = "rm -rf build bin CMakeFiles/" }
-build = { cmd = "mkdir -p bin && cmake --build build --config RelWithDebInfo --target all", depends_on = [
+print-env = { cmd = "echo $PATH" }
+
+[target.win-64.tasks]
+prepare = "cmake -G 'Visual Studio 17 2022' -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
+build = { cmd = "cmake --build build --config RelWithDebInfo", depends_on = [
+    "prepare",
+] }
+run = { cmd = "build/RelWithDebInfo/rerun_ext_example.exe", depends_on = [
+    "build",
+] }
+
+[target.linux-64.tasks]
+prepare = "cmake -G 'Ninja' -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
+build = { cmd = "cmake --build build --config RelWithDebInfo --target all", depends_on = [
     "prepare",
 ] }
 run = { cmd = "build/rerun_ext_example", depends_on = ["build"] }
 
 
+[target.osx-64.tasks]
+prepare = "cmake -G 'Ninja' -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
+build = { cmd = "cmake --build build --config RelWithDebInfo --target all", depends_on = [
+    "prepare",
+] }
+run = { cmd = "build/rerun_ext_example", depends_on = ["build"] }
+
+[target.osx-arm64.tasks]
+prepare = "cmake -G 'Ninja' -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
+build = { cmd = "cmake --build build --config RelWithDebInfo --target all", depends_on = [
+    "prepare",
+] }
+run = { cmd = "build/rerun_ext_example", depends_on = ["build"] }
+
 [dependencies]
 # Build tools:
 cmake = "3.27.6"
-cxx-compiler = "1.6.0.*"
-ninja = "1.11.1"
-
-# Required by Rerun:
-arrow-cpp = "13.0.0.*"
-
 # Required by this example:
 eigen = "3.4.0.*"
 opencv = "4.8.1.*"
+
+[target.linux-64.dependencies]
+# Build tools:
+cxx-compiler = "1.6.0.*"
+ninja = "1.11.1"
+
+[target.osx-64.dependencies]
+# Build tools:
+cxx-compiler = "1.6.0.*"
+ninja = "1.11.1"
+
+[target.osx-arm64.dependencies]
+# Build tools:
+cxx-compiler = "1.6.0.*"
+ninja = "1.11.1"
+
+[target.win-64.dependencies]
+# Build tools:
+vs2022_win-64 = "19.37.32822"
