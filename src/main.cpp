@@ -19,8 +19,8 @@ std::vector<Eigen::Vector3f> generate_random_points_vector(int num_points) {
 }
 
 int main() {
-    auto rec = rerun::RecordingStream("rerun_example_cpp");
-    rec.spawn().throw_on_failure();
+    const auto rec = rerun::RecordingStream("rerun_example_cpp");
+    rec.spawn().exit_on_failure();
 
     rec.log_timeless("world", rerun::ViewCoordinates::RIGHT_HAND_Z_UP); // Set an up-axis
 
@@ -57,7 +57,7 @@ int main() {
     );
 
     // Read image
-    std::string image_path = "rerun-logo.png";
+    const auto image_path = "rerun-logo.png";
     cv::Mat img = imread(image_path, cv::IMREAD_COLOR);
     if (img.empty()) {
         std::cout << "Could not read the image: " << image_path << std::endl;
