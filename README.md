@@ -15,16 +15,11 @@ This is a minimal CMake project that shows how to use [Rerun](https://github.com
 ## Installing the Rerun viewer
 The Rerun C++ SDK works by connecting to an awaiting Rerun Viewer over TCP.
 
-#### Building from source
-* [Install `cargo`](https://rustup.rs/)
-* `cargo install rerun-cli`
+If you need to install the viewer, follow the [installation guide](https://www.rerun.io/docs/getting-started/installing-viewer). Two of the more common ways to install the Rerun are:
+* Via cargo: `cargo install rerun-cli`
+* Via pip: `pip install rerun-sdk`
 
-#### Using `pip`
-* `pip install rerun-sdk`
-
-### Running the Rerun viewer
-Just type `rerun` and the rerun viewer should show up. Then it is time to run this example!
-
+After you have installed it, you should be able to type `rerun` in your terminal to start the viewer.
 
 ## Run this example
 
