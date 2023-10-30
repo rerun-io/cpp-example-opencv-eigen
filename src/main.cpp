@@ -8,46 +8,7 @@
 #include <opencv2/imgproc.hpp>
 #include <rerun.hpp>
 
-// Adapters so we can log eigen vectors as rerun positions:
-template <>
-struct rerun::ComponentBatchAdapter<rerun::Position3D, std::vector<Eigen::Vector3f>> {
-    // Sanity check that this is binary compatible.
-    static_assert(sizeof(rerun::Position3D) == sizeof(Eigen::Vector3f));
-    static_assert(alignof(rerun::Position3D) <= alignof(Eigen::Vector3f));
-
-    ComponentBatch<rerun::Position3D> operator()(const std::vector<Eigen::Vector3f>& container) {
-        return ComponentBatch<rerun::Position3D>::borrow(
-            reinterpret_cast<const rerun::Position3D*>(container.data()),
-            container.size()
-        );
-    }
-
-    ComponentBatch<rerun::Position3D> operator()(std::vector<Eigen::Vector3f>&& container) {
-        throw std::runtime_error("Not implemented for temporaries");
-    }
-};
-
-// Adapters so we can log an eigen matrix as rerun positions:
-template <>
-struct rerun::ComponentBatchAdapter<rerun::Position3D, Eigen::Matrix3Xf> {
-    // Sanity check that this is binary compatible.
-    static_assert(
-        sizeof(rerun::Position3D) ==
-        sizeof(Eigen::Matrix3Xf::Scalar) * Eigen::Matrix3Xf::RowsAtCompileTime
-    );
-    static_assert(alignof(rerun::Position3D) <= alignof(Eigen::Matrix3Xf));
-
-    ComponentBatch<rerun::Position3D> operator()(const Eigen::Matrix3Xf& matrix) {
-        return ComponentBatch<rerun::Position3D>::borrow(
-            reinterpret_cast<const rerun::Position3D*>(matrix.data()),
-            matrix.cols()
-        );
-    }
-
-    ComponentBatch<rerun::Position3D> operator()(std::vector<Eigen::Matrix3Xf>&& container) {
-        throw std::runtime_error("Not implemented for temporaries");
-    }
-};
+#include "batch_adapters.hpp"
 
 std::vector<Eigen::Vector3f> generate_random_points_vector(int num_points) {
     std::vector<Eigen::Vector3f> points(num_points);
