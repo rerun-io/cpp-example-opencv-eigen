@@ -32,7 +32,7 @@ Just type `rerun` and the rerun viewer should show up. Then it is time to run th
 The easiest way to get started is to install [pixi](https://prefix.dev/docs/pixi/overview).
 
 * Start the rerun viewer with `rerun` (see above)
-* Run the example with `pixi run run`
+* Run the example with `pixi run example`
 
 
 ### Manually
