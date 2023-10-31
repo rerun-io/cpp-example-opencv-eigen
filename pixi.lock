@@ -2085,6 +2085,279 @@ package:
   license_family: Apache
   size: 795051
   timestamp: 1690549670667
+- platform: linux-64
+  name: clang-format
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - clang-format-15 15.0.7 default_h7634d5b_3
+  - libclang-cpp15 >=15.0.7,<15.1.0a0
+  - libgcc-ng >=12
+  - libllvm15 >=15.0.7,<15.1.0a0
+  - libstdcxx-ng >=12
+  - libzlib >=1.2.13,<1.3.0a0
+  url: https://conda.anaconda.org/conda-forge/linux-64/clang-format-15.0.7-default_h7634d5b_3.conda
+  hash:
+    md5: 5ce1db65053ef3f8f4d093a724c277cc
+    sha256: f976f20823b48a7d95f04dcbddcb33ae81a5900d8b00c31cac0268ce21e3fe07
+  build: default_h7634d5b_3
+  arch: x86_64
+  subdir: linux-64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 133277
+  timestamp: 1690549957754
+- platform: osx-64
+  name: clang-format
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - clang-format-15 15.0.7 default_hdb78580_3
+  - libclang-cpp15 >=15.0.7,<15.1.0a0
+  - libcxx >=15.0.7
+  - libllvm15 >=15.0.7,<15.1.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-64/clang-format-15.0.7-default_hdb78580_3.conda
+  hash:
+    md5: 71b6895e2161905506c72b8d705072f7
+    sha256: 06bc8e49cb56acaa0ba50493a6c6689f31ee8573b45eebb5df5ecce4736a1392
+  build: default_hdb78580_3
+  arch: x86_64
+  subdir: osx-64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 133176
+  timestamp: 1690550267740
+- platform: osx-arm64
+  name: clang-format
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - clang-format-15 15.0.7 default_h5dc8d65_3
+  - libclang-cpp15 >=15.0.7,<15.1.0a0
+  - libcxx >=15.0.7
+  - libllvm15 >=15.0.7,<15.1.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/clang-format-15.0.7-default_h5dc8d65_3.conda
+  hash:
+    md5: c5238e0f10ad14fd48a282bdda50e164
+    sha256: 4e410c58ed91b79aeb9d62945f5981030d121f906c269df93f92c5e73500c185
+  build: default_h5dc8d65_3
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 133475
+  timestamp: 1690550223126
+- platform: win-64
+  name: clang-format
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - libzlib >=1.2.13,<1.3.0a0
+  - ucrt >=10.0.20348.0
+  - vc >=14.2,<15
+  - vc14_runtime >=14.29.30139
+  url: https://conda.anaconda.org/conda-forge/win-64/clang-format-15.0.7-default_h66ee7f4_3.conda
+  hash:
+    md5: e602a61e64266e854ab2234b8e80957a
+    sha256: 2788d948c2c7eeee1f02d7936d5b84f5547a94521abee10deb5287106c31d393
+  build: default_h66ee7f4_3
+  arch: x86_64
+  subdir: win-64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 1223464
+  timestamp: 1690553805296
+- platform: linux-64
+  name: clang-format-15
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - libclang-cpp15 >=15.0.7,<15.1.0a0
+  - libgcc-ng >=12
+  - libllvm15 >=15.0.7,<15.1.0a0
+  - libstdcxx-ng >=12
+  - libzlib >=1.2.13,<1.3.0a0
+  url: https://conda.anaconda.org/conda-forge/linux-64/clang-format-15-15.0.7-default_h7634d5b_3.conda
+  hash:
+    md5: 9c03ef6af3f5a320ce9780dcf705e4d2
+    sha256: ab0eff716fa20c9de8133e2c1987a38abb37aa3d33d52fe8beccd979e3b652ad
+  build: default_h7634d5b_3
+  arch: x86_64
+  subdir: linux-64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 259946
+  timestamp: 1690549899367
+- platform: osx-64
+  name: clang-format-15
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - libclang-cpp15 >=15.0.7,<15.1.0a0
+  - libcxx >=15.0.7
+  - libllvm15 >=15.0.7,<15.1.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-64/clang-format-15-15.0.7-default_hdb78580_3.conda
+  hash:
+    md5: 2bb52de137d26760268139c33a16c966
+    sha256: bfcae5a04fb7ec8fb1b097eab18b5222e9380463dd63683f78a171ad58f1df37
+  build: default_hdb78580_3
+  arch: x86_64
+  subdir: osx-64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 257644
+  timestamp: 1690550167340
+- platform: osx-arm64
+  name: clang-format-15
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - libclang-cpp15 >=15.0.7,<15.1.0a0
+  - libcxx >=15.0.7
+  - libllvm15 >=15.0.7,<15.1.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/clang-format-15-15.0.7-default_h5dc8d65_3.conda
+  hash:
+    md5: 037fa18a2b6befdc1be50237a07b7827
+    sha256: d3280499403ebe78beaab02d2f20588184f5a6d22863b7c2e67e7f93877eef74
+  build: default_h5dc8d65_3
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 255409
+  timestamp: 1690550130184
+- platform: linux-64
+  name: clang-tools
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - clang-format 15.0.7 default_h7634d5b_3
+  - libclang >=15.0.7,<15.1.0a0
+  - libclang-cpp15 >=15.0.7,<15.1.0a0
+  - libgcc-ng >=12
+  - libllvm15 >=15.0.7,<15.1.0a0
+  - libstdcxx-ng >=12
+  - libzlib >=1.2.13,<1.3.0a0
+  url: https://conda.anaconda.org/conda-forge/linux-64/clang-tools-15.0.7-default_h7634d5b_3.conda
+  hash:
+    md5: 0041e55028e791d403bdd0af5272a191
+    sha256: e2863149d76c5cb01656f9f27584b9c4b9494ef7d8c37fbdbae83b4230c0dce0
+  build: default_h7634d5b_3
+  arch: x86_64
+  subdir: linux-64
+  build_number: 3
+  constrains:
+  - clangdev 15.0.7
+  - clang 15.0.7.*
+  - llvm 15.0.7.*
+  - llvm-tools 15.0.7.*
+  - llvmdev 15.0.7.*
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 25224796
+  timestamp: 1690550008802
+- platform: osx-64
+  name: clang-tools
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - clang-format 15.0.7 default_hdb78580_3
+  - libclang >=15.0.7,<15.1.0a0
+  - libclang-cpp15 >=15.0.7,<15.1.0a0
+  - libcxx >=15.0.7
+  - libllvm15 >=15.0.7,<15.1.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-64/clang-tools-15.0.7-default_hdb78580_3.conda
+  hash:
+    md5: f3433671cb6c36f66f1d0f81254e0858
+    sha256: f54bca9c18ee9486682f7a796921dad2534920b48a04788f974dfb66550f9f77
+  build: default_hdb78580_3
+  arch: x86_64
+  subdir: osx-64
+  build_number: 3
+  constrains:
+  - clangdev 15.0.7
+  - clang 15.0.7.*
+  - llvm 15.0.7.*
+  - llvm-tools 15.0.7.*
+  - llvmdev 15.0.7.*
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 17091066
+  timestamp: 1690550394142
+- platform: osx-arm64
+  name: clang-tools
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - clang-format 15.0.7 default_h5dc8d65_3
+  - libclang >=15.0.7,<15.1.0a0
+  - libclang-cpp15 >=15.0.7,<15.1.0a0
+  - libcxx >=15.0.7
+  - libllvm15 >=15.0.7,<15.1.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/clang-tools-15.0.7-default_h5dc8d65_3.conda
+  hash:
+    md5: ab94653a176bda40d45bb6406f0bcff1
+    sha256: 19585e0a3ff5c0cfcf75c678f1471daa862013532cc9985e2662c1fb7d6a6707
+  build: default_h5dc8d65_3
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 3
+  constrains:
+  - clangdev 15.0.7
+  - clang 15.0.7.*
+  - llvm 15.0.7.*
+  - llvm-tools 15.0.7.*
+  - llvmdev 15.0.7.*
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 16055653
+  timestamp: 1690550344308
+- platform: win-64
+  name: clang-tools
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - clang-format 15.0.7 default_h66ee7f4_3
+  - libzlib >=1.2.13,<1.3.0a0
+  - ucrt >=10.0.20348.0
+  - vc >=14.2,<15
+  - vc14_runtime >=14.29.30139
+  url: https://conda.anaconda.org/conda-forge/win-64/clang-tools-15.0.7-default_h66ee7f4_3.conda
+  hash:
+    md5: 1fb8f6a1457d6ed1b9af746d5bc2d9a6
+    sha256: da98cba02f253133a9f727348c1671c0a619c52eba8ab1a7030f223414aba59e
+  build: default_h66ee7f4_3
+  arch: x86_64
+  subdir: win-64
+  build_number: 3
+  constrains:
+  - clangdev 15.0.7
+  - clang 15.0.7.*
+  - llvm 15.0.7.*
+  - llvm-tools 15.0.7.*
+  - llvmdev 15.0.7.*
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 207487053
+  timestamp: 1690554250567
 - platform: osx-64
   name: clang_impl_osx-64
   version: 15.0.7
@@ -6173,6 +6446,48 @@ package:
   license_family: Apache
   size: 133162
   timestamp: 1690549855318
+- platform: osx-64
+  name: libclang
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - libclang13 15.0.7 default_h953c2e9_3
+  - libcxx >=15.0.7
+  - libllvm15 >=15.0.7,<15.1.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-64/libclang-15.0.7-default_hdb78580_3.conda
+  hash:
+    md5: 23c66251664b188887eb702a02d22517
+    sha256: 5f958cf2b82934b9a244fdb9bd2ccd782da1a1460c44957190eea64ea9f9588c
+  build: default_hdb78580_3
+  arch: x86_64
+  subdir: osx-64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 133142
+  timestamp: 1690550061681
+- platform: osx-arm64
+  name: libclang
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - libclang13 15.0.7 default_hc7183e1_3
+  - libcxx >=15.0.7
+  - libllvm15 >=15.0.7,<15.1.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/libclang-15.0.7-default_h5dc8d65_3.conda
+  hash:
+    md5: c89d217a6315d89044ed531292678456
+    sha256: 9aa880fbcd910b2ead0ad1c629fd13fae0fa39717192481345f64caf7fb5ed26
+  build: default_h5dc8d65_3
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 133359
+  timestamp: 1690550025084
 - platform: win-64
   name: libclang
   version: 15.0.7
@@ -6196,6 +6511,28 @@ package:
   license_family: Apache
   size: 147881
   timestamp: 1690553583920
+- platform: linux-64
+  name: libclang-cpp15
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - libgcc-ng >=12
+  - libllvm15 >=15.0.7,<15.1.0a0
+  - libstdcxx-ng >=12
+  - libzlib >=1.2.13,<1.3.0a0
+  url: https://conda.anaconda.org/conda-forge/linux-64/libclang-cpp15-15.0.7-default_h7634d5b_3.conda
+  hash:
+    md5: 3dc837e8d805debd6c62a6dd89005811
+    sha256: 4d112ee1ccb56054fb266d61a3e75077129a299bcdc83547b701e528ce2e7d17
+  build: default_h7634d5b_3
+  arch: x86_64
+  subdir: linux-64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 17212684
+  timestamp: 1690549595833
 - platform: osx-64
   name: libclang-cpp15
   version: 15.0.7
@@ -6258,6 +6595,46 @@ package:
   license_family: Apache
   size: 9557507
   timestamp: 1690549793486
+- platform: osx-64
+  name: libclang13
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - libcxx >=15.0.7
+  - libllvm15 >=15.0.7,<15.1.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-64/libclang13-15.0.7-default_h953c2e9_3.conda
+  hash:
+    md5: fb8bc95ebc36a4682d3f45a3a31304a8
+    sha256: 87b42a1a905bdd77e8e000536c986edb91fbec6e8af2dec3db39c6ececfa872f
+  build: default_h953c2e9_3
+  arch: x86_64
+  subdir: osx-64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 7000324
+  timestamp: 1690549961410
+- platform: osx-arm64
+  name: libclang13
+  version: 15.0.7
+  category: main
+  manager: conda
+  dependencies:
+  - libcxx >=15.0.7
+  - libllvm15 >=15.0.7,<15.1.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/libclang13-15.0.7-default_hc7183e1_3.conda
+  hash:
+    md5: 3d011fbc2c7d55b4d6716a9b26da1185
+    sha256: 10e2f651456fa5869b944394093ed153616cc0ddaca69966b57d33f51e4d0316
+  build: default_hc7183e1_3
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 3
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 6453035
+  timestamp: 1690549917828
 - platform: win-64
   name: libclang13
   version: 15.0.7
