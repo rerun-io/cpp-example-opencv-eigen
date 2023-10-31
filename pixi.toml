@@ -57,9 +57,11 @@ build = { cmd = "cmake --build build --config RelWithDebInfo --target all", depe
     "prepare",
 ] }
 example = { cmd = "build/rerun_ext_example", depends_on = ["build"] }
+format = { cmd = "clang-format -i src/*" }
 
 [dependencies]
 # Build tools:
+clang-tools = ">=15,<16" # clang-format
 cmake = "3.27.6"
 # Required by this example:
 eigen = "3.4.0.*"
