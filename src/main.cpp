@@ -8,7 +8,7 @@
 #include <opencv2/imgproc.hpp>
 #include <rerun.hpp>
 
-#include "batch_adapters.hpp"
+#include "collection_adapters.hpp"
 
 std::vector<Eigen::Vector3f> generate_random_points_vector(int num_points) {
     std::vector<Eigen::Vector3f> points(num_points);
@@ -51,8 +51,8 @@ int main() {
     rec.log(
         "world/camera",
         rerun::Transform3D(
-            rerun::datatypes::Vec3D(camera_position.data()),
-            rerun::datatypes::Mat3x3(camera_orientation.data())
+            rerun::Vec3D(camera_position.data()),
+            rerun::Mat3x3(camera_orientation.data())
         )
     );
 
@@ -66,19 +66,7 @@ int main() {
 
     // Log image to Rerun
     cv::cvtColor(img, img, cv::COLOR_BGR2RGB); // Rerun expects RGB format
-    // NOTE currently we need to construct a vector to log an image, this will change in the future
-    //  see https://github.com/rerun-io/rerun/issues/3794
-    std::vector<uint8_t> img_vec(img.total() * img.channels());
-    img_vec.assign(img.data, img.data + img.total() * img.channels());
-    rec.log(
-        "image",
-        rerun::Image(
-            {static_cast<size_t>(img.rows),
-             static_cast<size_t>(img.cols),
-             static_cast<size_t>(img.channels())},
-            std::move(img_vec)
-        )
-    );
+    rec.log("image", rerun::Image(img, rerun::datatypes::TensorBuffer::u8(img)));
 
     return 0;
 }
