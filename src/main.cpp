@@ -65,6 +65,7 @@ int main() {
     }
 
     // Log image to Rerun
+    // TODO(https://github.com/rerun-io/rerun/pull/4331): remove `datatypes::`
     cv::cvtColor(img, img, cv::COLOR_BGR2RGB); // Rerun expects RGB format
     rec.log("image", rerun::Image(img, rerun::datatypes::TensorBuffer::u8(img)));
 

@@ -58,6 +58,7 @@ struct rerun::CollectionAdapter<uint8_t, cv::Mat> {
 };
 
 // Adapter for extracting tensor dimensions from an OpenCV matrix.
+// TODO(https://github.com/rerun-io/rerun/pull/4331): remove `datatypes::`
 template <>
 struct rerun::CollectionAdapter<rerun::datatypes::TensorDimension, cv::Mat> {
     Collection<rerun::datatypes::TensorDimension> operator()(const cv::Mat& img) {
