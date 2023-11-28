@@ -73,16 +73,3 @@ struct rerun::CollectionAdapter<uint8_t, cv::Mat> {
         return Collection<uint8_t>::take_ownership(std::move(img_vec));
     }
 };
-
-// Adapter for extracting tensor dimensions from an OpenCV matrix.
-template <>
-struct rerun::CollectionAdapter<rerun::TensorDimension, cv::Mat> {
-    /// Only overload the const& operator since there is no way of borrowing the dimensions anyways.
-    Collection<rerun::TensorDimension> operator()(const cv::Mat& img) {
-        return {
-            static_cast<size_t>(img.rows),
-            static_cast<size_t>(img.cols),
-            static_cast<size_t>(img.channels()),
-        };
-    }
-};

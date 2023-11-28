@@ -18,6 +18,10 @@ std::vector<Eigen::Vector3f> generate_random_points_vector(int num_points) {
     return points;
 }
 
+rerun::Collection<rerun::TensorDimension> tensor_shape(const cv::Mat& img) {
+    return {img.rows, img.cols, img.channels()};
+};
+
 int main() {
     const auto rec = rerun::RecordingStream("rerun_example_cpp");
     rec.spawn().exit_on_failure();
@@ -64,9 +68,15 @@ int main() {
         return 1;
     }
 
-    // Log image to Rerun
-    cv::cvtColor(img, img, cv::COLOR_BGR2RGB); // Rerun expects RGB format
-    rec.log("image", rerun::Image(img, rerun::TensorBuffer::u8(img)));
+    // Rerun expects RGB format
+    cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
+
+    // Log image to rerun using the tensor buffer adapter defined in `collection_adapters.hpp`.
+    rec.log("image0", rerun::Image(tensor_shape(img), rerun::TensorBuffer::u8(img)));
+
+    // Or by passing a pointer to the image data.
+    // The pointer cast here is redundant since `data` is already uint8_t in this case, but if you have e.g. a float image it may be necessary to cast to float*.
+    rec.log("image1", rerun::Image(tensor_shape(img), reinterpret_cast<const uint8_t*>(img.data)));
 
     return 0;
 }
