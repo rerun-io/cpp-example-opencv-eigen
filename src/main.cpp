@@ -8,7 +8,7 @@
 #include <opencv2/imgproc.hpp>
 #include <rerun.hpp>
 
-#include "batch_adapters.hpp"
+#include "collection_adapters.hpp"
 
 std::vector<Eigen::Vector3f> generate_random_points_vector(int num_points) {
     std::vector<Eigen::Vector3f> points(num_points);
@@ -17,6 +17,10 @@ std::vector<Eigen::Vector3f> generate_random_points_vector(int num_points) {
     }
     return points;
 }
+
+rerun::Collection<rerun::TensorDimension> tensor_shape(const cv::Mat& img) {
+    return {img.rows, img.cols, img.channels()};
+};
 
 int main() {
     const auto rec = rerun::RecordingStream("rerun_example_cpp");
@@ -51,8 +55,8 @@ int main() {
     rec.log(
         "world/camera",
         rerun::Transform3D(
-            rerun::datatypes::Vec3D(camera_position.data()),
-            rerun::datatypes::Mat3x3(camera_orientation.data())
+            rerun::Vec3D(camera_position.data()),
+            rerun::Mat3x3(camera_orientation.data())
         )
     );
 
@@ -64,21 +68,15 @@ int main() {
         return 1;
     }
 
-    // Log image to Rerun
-    cv::cvtColor(img, img, cv::COLOR_BGR2RGB); // Rerun expects RGB format
-    // NOTE currently we need to construct a vector to log an image, this will change in the future
-    //  see https://github.com/rerun-io/rerun/issues/3794
-    std::vector<uint8_t> img_vec(img.total() * img.channels());
-    img_vec.assign(img.data, img.data + img.total() * img.channels());
-    rec.log(
-        "image",
-        rerun::Image(
-            {static_cast<size_t>(img.rows),
-             static_cast<size_t>(img.cols),
-             static_cast<size_t>(img.channels())},
-            std::move(img_vec)
-        )
-    );
+    // Rerun expects RGB format
+    cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
+
+    // Log image to rerun using the tensor buffer adapter defined in `collection_adapters.hpp`.
+    rec.log("image0", rerun::Image(tensor_shape(img), rerun::TensorBuffer::u8(img)));
+
+    // Or by passing a pointer to the image data.
+    // The pointer cast here is redundant since `data` is already uint8_t in this case, but if you have e.g. a float image it may be necessary to cast to float*.
+    rec.log("image1", rerun::Image(tensor_shape(img), reinterpret_cast<const uint8_t*>(img.data)));
 
     return 0;
 }
