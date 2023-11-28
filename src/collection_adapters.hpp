@@ -15,7 +15,7 @@ struct rerun::CollectionAdapter<rerun::Position3D, std::vector<Eigen::Vector3f>>
         return Collection<rerun::Position3D>::borrow(container.data(), container.size());
     }
 
-    // Do a full copy for temporaries (otherwise the data will be deleted when the temporary is destroyed).
+    // Do a full copy for temporaries (otherwise the data might be deleted when the temporary is destroyed).
     Collection<rerun::Position3D> operator()(std::vector<Eigen::Vector3f>&& container) {
         std::vector<rerun::Position3D> positions(container.size());
         memcpy(positions.data(), container.data(), container.size() * sizeof(Eigen::Vector3f));
@@ -42,7 +42,7 @@ struct rerun::CollectionAdapter<rerun::Position3D, Eigen::Matrix3Xf> {
         );
     }
 
-    // Do a full copy for temporaries (otherwise the data will be deleted when the temporary is destroyed).
+    // Do a full copy for temporaries (otherwise the data might be deleted when the temporary is destroyed).
     Collection<rerun::Position3D> operator()(Eigen::Matrix3Xf&& matrix) {
         std::vector<rerun::Position3D> positions(matrix.cols());
         memcpy(positions.data(), matrix.data(), matrix.size() * sizeof(rerun::Position3D));
@@ -62,7 +62,7 @@ struct rerun::CollectionAdapter<uint8_t, cv::Mat> {
         return Collection<uint8_t>::borrow(img.data, img.total() * img.channels());
     }
 
-    // Do a full copy for temporaries (otherwise the data will be deleted when the temporary is destroyed).
+    // Do a full copy for temporaries (otherwise the data might be deleted when the temporary is destroyed).
     Collection<uint8_t> operator()(cv::Mat&& img) {
         assert(
             "OpenCV matrix was expected have bit depth CV_U8" && CV_MAT_DEPTH(img.type()) == CV_8U
@@ -75,11 +75,10 @@ struct rerun::CollectionAdapter<uint8_t, cv::Mat> {
 };
 
 // Adapter for extracting tensor dimensions from an OpenCV matrix.
-// TODO(https://github.com/rerun-io/rerun/pull/4331): remove `datatypes::`
 template <>
-struct rerun::CollectionAdapter<rerun::datatypes::TensorDimension, cv::Mat> {
+struct rerun::CollectionAdapter<rerun::TensorDimension, cv::Mat> {
     /// Only overload the const& operator since there is no way of borrowing the dimensions anyways.
-    Collection<rerun::datatypes::TensorDimension> operator()(const cv::Mat& img) {
+    Collection<rerun::TensorDimension> operator()(const cv::Mat& img) {
         return {
             static_cast<size_t>(img.rows),
             static_cast<size_t>(img.cols),
