@@ -23,6 +23,8 @@ rerun::Collection<rerun::TensorDimension> tensor_shape(const cv::Mat& img) {
 };
 
 int main() {
+    std::cout << "Rerun SDK Version: " << rerun::version_string() << std::endl;
+
     const auto rec = rerun::RecordingStream("rerun_example_cpp");
     rec.spawn().exit_on_failure();
 

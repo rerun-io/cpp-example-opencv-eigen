@@ -26,8 +26,8 @@ If you choose not to use pixi, you will need to install a few things yourself be
 The Rerun C++ SDK works by connecting to an awaiting Rerun Viewer over TCP.
 
 If you need to install the viewer, follow the [installation guide](https://www.rerun.io/docs/getting-started/installing-viewer). Two of the more common ways to install the Rerun are:
-* Via cargo: `cargo install rerun-cli`
-* Via pip: `pip install rerun-sdk`
+* Via cargo: `cargo install rerun-cli@0.12.0`
+* Via pip: `pip install rerun-sdk==0.12.0`
 
 After you have installed it, you should be able to type `rerun` in your terminal to start the viewer.
 
@@ -58,7 +58,7 @@ cmake --build build
 ```
 Instead of building via CMake you can also open `build/rerun_external_cpp_proj.sln` in Visual Studio and build & run from there.
 
-Then run the binary with 
+Then run the binary with
 ```cmd
 build\RelWithDebInfo\rerun_ext_example.exe
 ```
