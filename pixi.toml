@@ -63,10 +63,11 @@ format = { cmd = "clang-format -i src/*" }
 # Build tools:
 clang-tools = ">=15,<16" # clang-format
 cmake = "3.27.6"
+# Required by the Rerun C++ SDK (downloaded from Rerun's CMakeLists.txt if not found):
+arrow-cpp = ">=13.0.0,<13.1"
 # Required by this example:
 eigen = "3.4.0.*"
 opencv = "4.8.1.*"
-arrow-cpp = ">=13.0.0,<13.1"
 
 [target.linux-64.dependencies]
 # Build tools:
