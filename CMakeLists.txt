@@ -8,8 +8,14 @@ if(NOT DEFINED CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 17)
 endif()
 
+find_package(Arrow)
+if (Arrow_FOUND)
+  set(RERUN_DOWNLOAD_AND_BUILD_ARROW OFF)
+  set(RERUN_ARROW_LINK_SHARED ON)
+endif()
+
 include(FetchContent)
-FetchContent_Declare(rerun_sdk URL https://github.com/rerun-io/rerun/releases/download/0.12.0/rerun_cpp_sdk.zip)
+FetchContent_Declare(rerun_sdk URL https://github.com/rerun-io/rerun/releases/download/0.13.0/rerun_cpp_sdk.zip)
 FetchContent_MakeAvailable(rerun_sdk)
 
 find_package(Eigen3 REQUIRED)

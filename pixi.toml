@@ -66,6 +66,7 @@ cmake = "3.27.6"
 # Required by this example:
 eigen = "3.4.0.*"
 opencv = "4.8.1.*"
+arrow-cpp = ">=13.0.0,<13.1"
 
 [target.linux-64.dependencies]
 # Build tools:
