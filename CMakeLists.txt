@@ -8,9 +8,17 @@ if(NOT DEFINED CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 17)
 endif()
 
-include(FetchContent)
-FetchContent_Declare(rerun_sdk URL https://github.com/rerun-io/rerun/releases/download/0.14.1/rerun_cpp_sdk.zip)
-FetchContent_MakeAvailable(rerun_sdk)
+set(RERUN_CPP_URL "https://github.com/rerun-io/rerun/releases/download/0.14.1/rerun_cpp_sdk.zip" CACHE STRING "URL to the rerun_cpp zip.")
+option(RERUN_FIND_PACKAGE "Whether to use find_package to find a preinstalled rerun package (instead of using FetchContent)." OFF)
+
+if(RERUN_FIND_PACKAGE)
+  find_package(rerun_sdk REQUIRED)
+else()
+  # Download the rerun_sdk
+  include(FetchContent)
+  FetchContent_Declare(rerun_sdk URL ${RERUN_CPP_URL})
+  FetchContent_MakeAvailable(rerun_sdk)
+endif()
 
 find_package(Eigen3 REQUIRED)
 find_package(OpenCV REQUIRED)
