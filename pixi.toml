@@ -51,6 +51,9 @@ cmake = "3.27.6"
 # Required by this example:
 eigen = "3.4.0.*"
 opencv = "4.8.1.*"
+# Installs the Rerun Python SDK so the user doesn't have to download & install rerun-cli manually.
+# TODO(jleibs): In the future we'll want to use a rerun-cli package that only contains the CLI.
+rerun-sdk = "0.15.1"
 
 [target.unix.dependencies]
 # Build tools:
