@@ -8,7 +8,7 @@ if(NOT DEFINED CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 17)
 endif()
 
-set(RERUN_CPP_URL "https://github.com/rerun-io/rerun/releases/download/0.15.1/rerun_cpp_sdk.zip" CACHE STRING "URL to the rerun_cpp zip.")
+set(RERUN_CPP_URL "https://github.com/rerun-io/rerun/releases/download/0.16.0/rerun_cpp_sdk.zip" CACHE STRING "URL to the rerun_cpp zip.")
 option(RERUN_FIND_PACKAGE "Whether to use find_package to find a preinstalled rerun package (instead of using FetchContent)." OFF)
 
 if(RERUN_FIND_PACKAGE)
