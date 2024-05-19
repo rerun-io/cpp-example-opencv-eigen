@@ -28,7 +28,7 @@ clean = { cmd = "rm -rf build bin CMakeFiles/" }
 print-env = { cmd = "echo $PATH" }
 
 [target.win-64.tasks]
-prepare = "cmake -G 'Visual Studio 17 2022' -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
+prepare = "cmake -G 'Visual Studio 17 2022' -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo -DRERUN_FIND_PACKAGE:BOOL=OFF"
 build = { cmd = "cmake --build build --config RelWithDebInfo", depends_on = [
     "prepare",
 ] }
@@ -37,12 +37,32 @@ example = { cmd = "build/RelWithDebInfo/rerun_ext_example.exe", depends_on = [
 ] }
 
 [target.unix.tasks]
-prepare = "cmake -G 'Ninja' -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
+prepare = "cmake -G 'Ninja' -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo -DRERUN_FIND_PACKAGE:BOOL=OFF"
 build = { cmd = "cmake --build build --config RelWithDebInfo --target all", depends_on = [
     "prepare",
 ] }
 example = { cmd = "build/rerun_ext_example", depends_on = ["build"] }
 format = { cmd = "clang-format -i src/*" }
+
+[feature.rerunfindpackage.target.win-64.tasks]
+prepare = "cmake -G 'Visual Studio 17 2022' -B buildrerunfindpackage -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo -DRERUN_FIND_PACKAGE:BOOL=ON"
+build = { cmd = "cmake --build buildrerunfindpackage --config RelWithDebInfo", depends_on = [
+    "prepare",
+] }
+example = { cmd = "buildrerunfindpackage/RelWithDebInfo/rerun_ext_example.exe", depends_on = [
+    "build",
+] }
+
+[feature.rerunfindpackage.target.unix.tasks]
+prepare = "cmake -G 'Ninja' -B buildrerunfindpackage -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo -DRERUN_FIND_PACKAGE:BOOL=ON"
+build = { cmd = "cmake --build buildrerunfindpackage --config RelWithDebInfo --target all", depends_on = [
+    "prepare",
+] }
+example = { cmd = "buildrerunfindpackage/rerun_ext_example", depends_on = [
+    "build",
+] }
+format = { cmd = "clang-format -i src/*" }
+
 
 [dependencies]
 # Build tools:
@@ -63,3 +83,12 @@ ninja = "1.11.1"
 [target.win-64.dependencies]
 # Build tools:
 vs2022_win-64 = "19.37.32822"
+
+[feature.rerunfindpackage.dependencies]
+librerun-sdk = "0.17.0.*"
+
+[environments]
+default = { solve-group = "defaultgroup" }
+rerunfindpackage = { features = [
+    "rerunfindpackage",
+], solve-group = "defaultgroup" }
