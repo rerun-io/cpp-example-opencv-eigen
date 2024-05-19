@@ -11,10 +11,10 @@ jobs:
 
       - uses: prefix-dev/setup-pixi@v0.6.0
         with:
-          pixi-version: v0.22.0
+          pixi-version: v0.20.0
           cache: true
 
       - name: run build task on all environments
         run: |
-          - pixi run -e default build
-          - pixi run -e rerunfindpackage build
+          pixi run -e default build
+          pixi run -e rerunfindpackage build
