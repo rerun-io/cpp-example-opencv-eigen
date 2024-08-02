@@ -47,7 +47,7 @@ scripts = ["pixi/env.bat"]
 print-env = { cmd = "echo $PATH" }
 
 [target.unix.tasks]
-# This task only runs propertly Unix systems.
+# This task only runs properly Unix systems.
 format = { cmd = "clang-format -i src/*" }
 
 ################################################################################
