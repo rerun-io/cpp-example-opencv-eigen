@@ -17,10 +17,10 @@ The easiest way to get started is to install [pixi](https://prefix.dev/docs/pixi
 
 The pixi environment described in `pixi.toml` contains all of the dependencies, including the rerun viewer,
 allowing you to run the example with a single command, while the rerun C++ SDK is downloaded via `FetchContent`
-* `pixi run -e default example`
+* `pixi run example`
 
 If you want to also download rerun C++ SDK via pixi, you can run:
-* `pixi run -e rerundfindpackage example`
+* `pixi run example-findpackage`
 
 ## Without `pixi`
 If you choose not to use pixi, you will need to install a few things yourself before you get started.

@@ -16,5 +16,5 @@ jobs:
 
       - name: run build task on all environments
         run: |
-          pixi run -e default build
-          pixi run -e rerunfindpackage build
+          pixi run build-fetchcontent
+          pixi run build-findpackage

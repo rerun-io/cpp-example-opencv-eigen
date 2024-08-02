@@ -1,6 +1,5 @@
 # Build directories
-build
-buildrerunfindpackage
+build_*
 
 # Pixi environment
 .pixi
