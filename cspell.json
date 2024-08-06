@@ -5,6 +5,7 @@
     "ignoreWords": [
         "eigen",
         "Eigen",
+        "findpackage",
         "pixi",
         "srcset"
     ]

@@ -14,4 +14,7 @@ jobs:
           pixi-version: v0.25.0
           cache: true
 
-      - run: pixi run build
+      - name: run build task on all environments
+        run: |
+          pixi run build-fetchcontent
+          pixi run build-findpackage

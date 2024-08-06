@@ -21,29 +21,73 @@ readme = "README.md"
 repository = "https://github.com/rerun-io/cpp-example-opencv-eigen"
 version = "0.1.0"
 
+# The following activation scripts make the tasks portable cross-platform.
+#
+# They define:
+# - CMAKE_GENERATOR
+# - BUILD_FOLDER
+# - EXE_PATH
+#
+# In particular, BUILD_FOLDER will be set to either:
+# - build_fetchcontent
+# - build_findpackage
+# depending on the feature being used.
+[activation]
+scripts = ["pixi/env.sh"]
+
+[target.win-64.activation]
+scripts = ["pixi/env.bat"]
+
+################################################################################
+# Common Tasks
+################################################################################
 
 [tasks]
-# Note: extra CLI argument after `pixi run TASK` are passed to the task cmd.
-clean = { cmd = "rm -rf build bin CMakeFiles/" }
+
 print-env = { cmd = "echo $PATH" }
 
-[target.win-64.tasks]
-prepare = "cmake -G 'Visual Studio 17 2022' -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
-build = { cmd = "cmake --build build --config RelWithDebInfo", depends_on = [
-    "prepare",
-] }
-example = { cmd = "build/RelWithDebInfo/rerun_ext_example.exe", depends_on = [
-    "build",
-] }
-
 [target.unix.tasks]
-prepare = "cmake -G 'Ninja' -B build -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
-build = { cmd = "cmake --build build --config RelWithDebInfo --target all", depends_on = [
-    "prepare",
-] }
-example = { cmd = "build/rerun_ext_example", depends_on = ["build"] }
+# This task only runs properly Unix systems.
 format = { cmd = "clang-format -i src/*" }
 
+################################################################################
+# Building against Rerun using the default of FetchContent.
+#
+# The rerun-cpp source will be downloaded and built as part of the build.
+################################################################################
+[feature.fetchcontent.tasks]
+
+prepare-fetchcontent = "cmake -B $BUILD_FOLDER -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
+
+build-fetchcontent = { cmd = "cmake --build $BUILD_FOLDER  --config RelWithDebInfo", depends_on = [
+    "prepare-fetchcontent",
+] }
+
+example = { cmd = "$EXE_PATH", depends_on = ["build-fetchcontent"] }
+
+clean = { cmd = "rm -rf $BUILD_FOLDER bin CMakeFiles/" }
+
+################################################################################
+# Alternatively, build by locating Rerun via find_package
+#
+# In this case rerun is provided by the `librerun-sdk` package in the
+# conda environment.
+################################################################################
+[feature.findpackage.tasks]
+
+prepare-findpackage = "cmake -B $BUILD_FOLDER -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo -DRERUN_FIND_PACKAGE:BOOL=ON"
+
+build-findpackage = { cmd = "cmake --build $BUILD_FOLDER  --config RelWithDebInfo", depends_on = [
+    "prepare-findpackage",
+] }
+
+example-findpackage = { cmd = "$EXE_PATH", depends_on = ["build-findpackage"] }
+
+clean = { cmd = "rm -rf $BUILD_FOLDER bin CMakeFiles/" }
+
+################################################################################
+# Dependencies
+################################################################################
 [dependencies]
 # Build tools:
 clang-tools = ">=15,<16" # clang-format
@@ -63,3 +107,11 @@ ninja = "1.11.1"
 [target.win-64.dependencies]
 # Build tools:
 vs2022_win-64 = "19.37.32822"
+
+[feature.findpackage.dependencies]
+librerun-sdk = "0.17.0.*"
+
+[environments]
+default = { solve-group = "defaultgroup" }
+fetchcontent = { features = ["fetchcontent"], solve-group = "defaultgroup" }
+findpackage = { features = ["findpackage"], solve-group = "defaultgroup" }

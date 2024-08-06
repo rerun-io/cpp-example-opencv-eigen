@@ -1,5 +1,5 @@
-# Build directory
-build
+# Build directories
+build_*
 
 # Pixi environment
 .pixi
