@@ -97,7 +97,7 @@ eigen = "3.4.0.*"
 opencv = "4.8.1.*"
 # Installs the Rerun Python SDK so the user doesn't have to download & install rerun-cli manually.
 # TODO(jleibs): In the future we'll want to use a rerun-cli package that only contains the CLI.
-rerun-sdk = "0.17.0"
+rerun-sdk = "0.18.2"
 
 [target.unix.dependencies]
 # Build tools:
@@ -109,7 +109,7 @@ ninja = "1.11.1"
 vs2022_win-64 = "19.37.32822"
 
 [feature.findpackage.dependencies]
-librerun-sdk = "0.17.0.*"
+librerun-sdk = "0.18.2"
 
 [environments]
 default = { solve-group = "defaultgroup" }
