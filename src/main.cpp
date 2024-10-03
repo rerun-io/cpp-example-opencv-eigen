@@ -18,17 +18,13 @@ std::vector<Eigen::Vector3f> generate_random_points_vector(int num_points) {
     return points;
 }
 
-rerun::Collection<rerun::TensorDimension> tensor_shape(const cv::Mat& img) {
-    return {img.rows, img.cols, img.channels()};
-};
-
 int main() {
     std::cout << "Rerun SDK Version: " << rerun::version_string() << std::endl;
 
     const auto rec = rerun::RecordingStream("rerun_example_cpp");
     rec.spawn().exit_on_failure();
 
-    rec.log_timeless("world", rerun::ViewCoordinates::RIGHT_HAND_Z_UP); // Set an up-axis
+    rec.log_static("world", rerun::ViewCoordinates::RIGHT_HAND_Z_UP); // Set an up-axis
 
     const int num_points = 1000;
 
@@ -70,15 +66,24 @@ int main() {
         return 1;
     }
 
+    uint32_t width = img.cols;
+    uint32_t height = img.rows;
+
     // Rerun expects RGB format
     cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
 
     // Log image to rerun using the tensor buffer adapter defined in `collection_adapters.hpp`.
-    rec.log("image0", rerun::Image(tensor_shape(img), rerun::TensorBuffer::u8(img)));
+    rec.log("image0", rerun::Image::from_rgb24(img, {width, height}));
 
     // Or by passing a pointer to the image data.
     // The pointer cast here is redundant since `data` is already uint8_t in this case, but if you have e.g. a float image it may be necessary to cast to float*.
-    rec.log("image1", rerun::Image(tensor_shape(img), reinterpret_cast<const uint8_t*>(img.data)));
+    rec.log(
+        "image1",
+        rerun::Image::from_rgb24(
+            rerun::borrow(img.data, img.total() * img.elemSize()),
+            {width, height}
+        )
+    );
 
     return 0;
 }
