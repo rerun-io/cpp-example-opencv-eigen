@@ -11,7 +11,7 @@ jobs:
 
       - uses: prefix-dev/setup-pixi@v0.8.1
         with:
-          pixi-version: v0.26.1
+          pixi-version: v0.40.3
           cache: true
 
       - name: run build task on all environments
