@@ -59,11 +59,11 @@ format = { cmd = "clang-format -i src/*" }
 
 prepare-fetchcontent = "cmake -B $BUILD_FOLDER -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo"
 
-build-fetchcontent = { cmd = "cmake --build $BUILD_FOLDER  --config RelWithDebInfo", depends_on = [
+build-fetchcontent = { cmd = "cmake --build $BUILD_FOLDER  --config RelWithDebInfo", depends-on = [
     "prepare-fetchcontent",
 ] }
 
-example = { cmd = "$EXE_PATH", depends_on = ["build-fetchcontent"] }
+example = { cmd = "$EXE_PATH", depends-on = ["build-fetchcontent"] }
 
 clean = { cmd = "rm -rf $BUILD_FOLDER bin CMakeFiles/" }
 
@@ -77,11 +77,11 @@ clean = { cmd = "rm -rf $BUILD_FOLDER bin CMakeFiles/" }
 
 prepare-findpackage = "cmake -B $BUILD_FOLDER -S . -DCMAKE_BUILD_TYPE=RelWithDebInfo -DRERUN_FIND_PACKAGE:BOOL=ON"
 
-build-findpackage = { cmd = "cmake --build $BUILD_FOLDER  --config RelWithDebInfo", depends_on = [
+build-findpackage = { cmd = "cmake --build $BUILD_FOLDER  --config RelWithDebInfo", depends-on = [
     "prepare-findpackage",
 ] }
 
-example-findpackage = { cmd = "$EXE_PATH", depends_on = ["build-findpackage"] }
+example-findpackage = { cmd = "$EXE_PATH", depends-on = ["build-findpackage"] }
 
 clean = { cmd = "rm -rf $BUILD_FOLDER bin CMakeFiles/" }
 
@@ -91,13 +91,13 @@ clean = { cmd = "rm -rf $BUILD_FOLDER bin CMakeFiles/" }
 [dependencies]
 # Build tools:
 clang-tools = ">=15,<16" # clang-format
-cmake = "3.27.6"
+cmake = "3.27.6.*"
 # Required by this example:
 eigen = "3.4.0.*"
 opencv = "4.10.0.*"
 # Installs the Rerun Python SDK so the user doesn't have to download & install rerun-cli manually.
 # TODO(jleibs): In the future we'll want to use a rerun-cli package that only contains the CLI.
-rerun-sdk = "0.21.0"
+rerun-sdk = "0.21.0.*"
 
 [target.linux-64.dependencies]
 sysroot_linux-64 = ">=2.17,<3" # rustc 1.64+ requires glibc 2.17+, see https://blog.rust-lang.org/2022/08/01/Increasing-glibc-kernel-requirements.html
@@ -108,14 +108,14 @@ sysroot_linux-aarch64 = ">=2.17,<3" # rustc 1.64+ requires glibc 2.17+, see http
 [target.unix.dependencies]
 # Build tools:
 cxx-compiler = "1.6.0.*"
-ninja = "1.11.1"
+ninja = "1.11.1.*"
 
 [target.win-64.dependencies]
 # Build tools:
-vs2022_win-64 = "19.37.32822"
+vs2022_win-64 = "19.37.32822.*"
 
 [feature.findpackage.dependencies]
-librerun-sdk = "0.21.0"
+librerun-sdk = "0.21.0.*"
 
 [environments]
 default = { solve-group = "defaultgroup" }
