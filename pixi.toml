@@ -94,10 +94,10 @@ clang-tools = ">=15,<16" # clang-format
 cmake = "3.27.6"
 # Required by this example:
 eigen = "3.4.0.*"
-opencv = "4.8.1.*"
+opencv = "4.10.0.*"
 # Installs the Rerun Python SDK so the user doesn't have to download & install rerun-cli manually.
 # TODO(jleibs): In the future we'll want to use a rerun-cli package that only contains the CLI.
-rerun-sdk = "0.18.2"
+rerun-sdk = "0.21.0"
 
 [target.linux-64.dependencies]
 sysroot_linux-64 = ">=2.17,<3" # rustc 1.64+ requires glibc 2.17+, see https://blog.rust-lang.org/2022/08/01/Increasing-glibc-kernel-requirements.html
@@ -115,7 +115,7 @@ ninja = "1.11.1"
 vs2022_win-64 = "19.37.32822"
 
 [feature.findpackage.dependencies]
-librerun-sdk = "0.18.2"
+librerun-sdk = "0.21.0"
 
 [environments]
 default = { solve-group = "defaultgroup" }
