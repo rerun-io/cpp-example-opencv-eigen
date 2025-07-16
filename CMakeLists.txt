@@ -16,7 +16,7 @@ if(RERUN_FIND_PACKAGE)
 else()
   # Download the rerun_sdk
   include(FetchContent)
-  FetchContent_Declare(rerun_sdk URL ${RERUN_CPP_URL})
+  FetchContent_Declare(rerun_sdk URL "https://build.rerun.io/commit/94af081/rerun_cpp_sdk.zip") # TODO: update to released version
   FetchContent_MakeAvailable(rerun_sdk)
 endif()
 
